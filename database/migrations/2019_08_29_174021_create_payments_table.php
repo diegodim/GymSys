@@ -18,7 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->unsignedBigInteger('client_id');
             $table->date('paid_at');
             $table->date('due_at');
-            $table->decimal('value', 8, 2);
+            $table->double('value', 10, 2);
             $table->unsignedBigInteger('plan_id');
             $table->timestamps();
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate('cascade');
