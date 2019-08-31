@@ -114,9 +114,37 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'Home',
+            'text'        => 'Início',
             'url'         => 'admin',
             'icon'        => 'fas fa-home',
+        ],
+        [
+            'text'        => 'Pessoa',
+            'icon'        => 'fas fa-user',
+            'submenu'     =>[
+                [
+                    'text'        => 'Cliente',
+                    'url'         => 'admin/client',
+                    'icon'        => 'fas fa-running',
+                ],
+            ]
+        ],
+        [
+            'text'        => 'Financeiro',
+            'url'         => 'admin',
+            'icon'        => 'fas fa-money-check-alt',
+            'submenu'     =>[
+                [
+                    'text'        => 'Pagamento',
+                    'url'         => 'admin/payment',
+                    'icon'        => 'fas fa-dollar-sign',
+                ],
+                [
+                    'text'        => 'Relatório Finaceiro',
+                    'url'         => 'admin/payment/report',
+                    'icon'        => 'fas fa-file-invoice-dollar',
+                ],
+            ]
         ],
         ['header' => 'Configurações de usuário'],
         [

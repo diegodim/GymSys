@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Faker\Provider\zh_TW\Person;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -39,6 +40,6 @@ class User extends Authenticatable
 
     public function person()
     {
-        return $this->hasOne('App\Models\Person');
+        return $this->hasOne(Person::class);
     }
 }
