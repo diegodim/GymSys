@@ -4,16 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Person;
 use App\Models\Client;
 class ClientController extends Controller
 {
 
-    private $people;
-    private $totalPage = 10;
-    public function __construct(Person $people)
+    private $clients;
+    private $totalPage = 7;
+    public function __construct(CLient $clients)
     {
-        $this->people = $people;
+        $this->clients = $clients;
     }
     /**
      * Display a listing of the resource.
@@ -22,8 +21,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $people = $this->people->paginate($this->totalPage);
-        return view('admin.client.index', ['people' => $people]);
+        $clients = $this->clients->with('person')->paginate($this->totalPage);
+        //dd($clients);
+        return view('admin.client.index', ['clients' => $clients]);
     }
 
     /**
@@ -33,7 +33,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.client.create-edit');
     }
 
     /**

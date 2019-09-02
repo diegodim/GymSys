@@ -5,8 +5,8 @@
 @section('content_header')
     <h1>Cliente</h1>
     <ol class="breadcrumb">
-        <li><a href="">Home</a></li>
-        <li><a href="">Cliente</a></li>
+        <li><a href="{{ route('admin.home') }}">Início</a></li>
+        <li class="active"><a>Cliente</a></li>
     </ol>
 @stop
 
@@ -14,16 +14,16 @@
     <div class="box">
         <div class="box-header">
             <div class="row">
-                <div class="col-xs-4">
+                <div class="col-sm-4">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Pesquisar">
                         <span class="input-group-btn">
-                            <a haref="" class="btn btn-info btn-flat"><i class="fas fa-search"></i> Buscar</a>
+                            <a href="" class="btn btn-info"><i class="fas fa-search"></i> Buscar</a>
                         </span>
                     </div>
                 </div>
-                <div class="col-xs-8">
-                    <a haref=""  class="btn btn-success btn-flat pull-right"><i class="fas fa-plus"></i> Cadastrar</a>
+                <div class="col-sm-8">
+                    <a href="{{ route('client.create') }}"  class="btn btn-success pull-right"><i class="fas fa-plus"></i> Cadastrar</a>
                 </div>
             </div>
         </div>
@@ -35,24 +35,39 @@
                         <th>Nome</th>
                         <th>CPF</th>
                         <th>Identidade</th>
+                        <th>Endereço</th>
                         <th width="100px">Ações</th>
                     </tr>
                 </thead>
-                @forelse ($people as $person)
+                @forelse ($clients as $client)
                 <tbody>
                     <tr>
-                        <td>{{ $person->name }}</td>
-                        <td>{{ $person->cpf }}</td>
-                        <td>{{ $person->id_number }}</td>
-                        <td></td>
+                        <td>{{ $client->person->name }}</td>
+                        <td>{{ $client->person->cpf }}</td>
+                        <td>{{ $client->person->id_number }}</td>
+                        <td>{{ $client->person->public_place }} {{ $client->person->neighborhood }}</td>
+                        <td>
+                            <a href=""  class="btn btn-info btn-sm">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a href=""  class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
                 @empty
-                    <p>No clients</p>
+                <tbody>
+                    <tr>
+                    <td><b>Nenhum cliente!</b></td>
+                    </tr>
+                </tbody>
                 @endforelse
             </table>
             </div>
-            {{ $people->links() }}
+        </div>
+        <div class="pull-right">
+            {{ $clients->links() }}
         </div>
     </div>
 @stop

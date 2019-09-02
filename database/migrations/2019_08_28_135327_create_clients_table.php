@@ -15,7 +15,7 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->unique();
-            $table->string("biometricHash", 500)->unique();
+            $table->string("biometric_hash", 500)->unique();
             $table->timestamps();
             $table->foreign('id')->references('id')->on('people')->onDelete('cascade')->onUpdate('cascade');
         });

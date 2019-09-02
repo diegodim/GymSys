@@ -19,11 +19,11 @@ class CreatePeopleTable extends Migration
             $table->string("cpf", 11)->unique()->unique();
             $table->string("id_number", 15)->unique();
             $table->string("public_place", 50)->nullable();
-            $table->string("number", 50)->nullable();
+            //$table->string("number", 50)->nullable();
             $table->string("neighborhood", 50)->nullable();
             $table->string("city", 50)->nullable();
             $table->integer("state_id")->nullable();
-            $table->integer("zip_code")->nullable();
+            $table->integer("postal")->nullable();
             $table->bigInteger("phone");
             $table->boolean('activated')->default(1);
             $table->timestamps();
