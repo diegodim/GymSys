@@ -18,8 +18,7 @@ class CreatePeopleTable extends Migration
             $table->string('name', 25);
             $table->string("cpf", 11)->unique()->unique();
             $table->string("id_number", 15)->unique();
-            $table->string("public_place", 50)->nullable();
-            //$table->string("number", 50)->nullable();
+            $table->string("adress", 50)->nullable();
             $table->string("neighborhood", 50)->nullable();
             $table->string("city", 50)->nullable();
             $table->integer("state_id")->nullable();

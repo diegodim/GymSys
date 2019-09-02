@@ -21,7 +21,7 @@ class ClientsTableSeeder extends Seeder
             $person = Person::create([
                 'name'          =>  $faker->name,
                 'cpf'           =>  $faker->cpf,
-                'public_place'  =>  $faker->streetAddress,
+                'adress'        =>  $faker->streetAddress,
                 'city'          =>  $faker->city,
                 'postal'        =>  $faker->randomDigit,
                 'id_number'     =>  $faker->cpf,

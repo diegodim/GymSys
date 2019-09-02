@@ -25,19 +25,19 @@
                     </div>
                 </div>
                 <div class="form-group row" >
-                    <label for="inputIdNumber" class="col-lg-1 col-form-label">Indetidade:</label>
-                    <div class="col-lg-11">
-                        <input class="form-control" type="text" placeholder="Indentidade" id="inputIdNumber">
-                    </div>
-                </div>
-                <div class="form-group row" >
                     <label for="inputCpf" class="col-lg-1 col-form-label">CPF:</label>
                     <div class="col-lg-11">
                             <input class="form-control" type="text" placeholder="CPF" id="inputCpf">
                     </div>
                 </div>
                 <div class="form-group row" >
-                    <label for="inputPublicPlace" class="col-lg-1 col-form-label">Logradouro:</label>
+                    <label for="inputIdNumber" class="col-lg-1 col-form-label">Indetidade:</label>
+                    <div class="col-lg-11">
+                        <input class="form-control" type="text" placeholder="Indentidade" id="inputIdNumber">
+                    </div>
+                </div>
+                <div class="form-group row" >
+                    <label for="inputPublicPlace" class="col-lg-1 col-form-label">Endereço:</label>
                     <div class="col-lg-11">
                         <input class="form-control" type="text" placeholder="Logradouro" id="inputPublicPlace">
                     </div>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group row" >
-                            <label class="col-lg-2 col-form-label" for="inputCity" >CIdade:</label>
+                            <label class="col-lg-2 col-form-label" for="inputCity" >Cidade:</label>
                             <div class="col-lg-10">
                                 <input class="form-control" type="text" placeholder="Cidade" id="inputCity">
                             </div>

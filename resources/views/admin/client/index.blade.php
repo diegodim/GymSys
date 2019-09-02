@@ -34,7 +34,6 @@
                     <tr>
                         <th>Nome</th>
                         <th>CPF</th>
-                        <th>Identidade</th>
                         <th>Endereço</th>
                         <th width="100px">Ações</th>
                     </tr>
@@ -44,8 +43,7 @@
                     <tr>
                         <td>{{ $client->person->name }}</td>
                         <td>{{ $client->person->cpf }}</td>
-                        <td>{{ $client->person->id_number }}</td>
-                        <td>{{ $client->person->public_place }} {{ $client->person->neighborhood }}</td>
+                        <td>{{ $client->person->adress }} {{ $client->person->neighborhood }}</td>
                         <td>
                             <a href=""  class="btn btn-info btn-sm">
                                 <i class="fas fa-pencil-alt"></i>
