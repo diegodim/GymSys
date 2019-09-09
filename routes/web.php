@@ -15,6 +15,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::get('/', 'AdminController@index')->name('admin.home');
     Route::get('client', 'ClientController@index')->name('admin.client');
     Route::get('client/create', 'ClientController@create')->name('client.create');
+    Route::post('client/store', 'ClientController@store')->name('client.store');
 });
 
 

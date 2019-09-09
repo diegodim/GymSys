@@ -4,15 +4,23 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ClientCreateFormRequest;
 use App\Models\Client;
+use App\Models\Person;
+use App\Models\State;
+
 class ClientController extends Controller
 {
 
     private $clients;
+    private $states;
+    private $people;
     private $totalPage = 7;
-    public function __construct(CLient $clients)
+    public function __construct(CLient $clients, State $states, Person $people)
     {
         $this->clients = $clients;
+        $this->states = $states;
+        $this->people = $people;
     }
     /**
      * Display a listing of the resource.
@@ -21,7 +29,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = $this->clients->with('person')->paginate($this->totalPage);
+        $clients = $this->clients->orderBy('id', 'desc')->with('person')->paginate($this->totalPage);
         //dd($clients);
         return view('admin.client.index', ['clients' => $clients]);
     }
@@ -33,7 +41,9 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('admin.client.create-edit');
+        $states = $this->states->orderBy('name')->pluck('uf', 'id');
+        //dd($states);
+        return view('admin.client.create-edit', ['states' => $states ]);
     }
 
     /**
@@ -42,9 +52,31 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClientCreateFormRequest $request)
     {
         //
+        $dataForm = $request->except(['_token','biometric_hash']);
+
+        $insert = $this->people->create($dataForm);
+        //dd($insert);
+        if($insert)
+        {
+            $insert = $this->clients->create([
+                'id'                => $insert->id,
+                'biometric_hash'    => bcrypt($insert->id),
+
+            ]);
+            if($insert)
+            {
+                return redirect('admin/client');
+            }
+            else
+                return redirect()->back();
+
+        }
+        else
+            return redirect()->back();
+
     }
 
     /**
