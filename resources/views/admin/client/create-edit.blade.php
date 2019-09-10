@@ -58,7 +58,7 @@
                         <div class="form-group row {{ $errors->has('neighborhood') ? 'has-error' : '' }}" >
                             <label class="col-lg-2 col-form-label" for="neighborhood" >Bairro:</label>
                             <div class="col-lg-10">
-                                <input class="form-control" type="text" placeholder="Bairro" id="neeighborhood" name="neeighborhood" value="{{ old('neeighborhood') }}">
+                                <input class="form-control" type="text" placeholder="Bairro" id="neeighborhood" name="neighborhood" value="{{ old('neighborhood') }}">
                             </div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="form-group row" >
+                        <div class="form-group row {{ $errors->has('biometric_hash') ? 'has-error' : '' }}" >
                             <label class="col-lg-2 col-form-label" for="biometric_hash" >Biometria:</label>
                             <div class="col-lg-10">
                                 <button type="button" class="form-control btn btn-warning" data-toggle="modal" data-target="#biometricModal" ><i class="fas fa-fingerprint"></i> Biometria</button>

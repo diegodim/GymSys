@@ -24,7 +24,6 @@ class CreatePeopleTable extends Migration
             $table->unsignedBigInteger("state_id")->nullable();
             $table->integer("postal")->nullable();
             $table->bigInteger("phone");
-            $table->boolean('activated')->default(1);
             $table->timestamps();
             $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade')->onUpdate('cascade');
         });

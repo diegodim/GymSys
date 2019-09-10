@@ -24,25 +24,37 @@ class ClientCreateFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'          =>'required|min:1|max:50',
-            'cpf'           =>'required|min:11|unique:people|numeric',
+            'name'          =>'required|min:5|max:50',
+            'cpf'           =>'required|min:100000000|unique:people|numeric',
             'id_number'     =>'required|min:5|max:15|unique:people',
-            'adress'        =>'nullable|min:3|max:50',
+            'adress'        =>'nullable|min:5|max:50',
             'neighborhood'  =>'nullable|min:3|max:50',
             'city'          =>'nullable|min:3|max:50',
             'state_id'      =>'nullable|numeric',
-            'cep'           =>'nullable|min:8|max:8|numeric',
-            'phone'         =>'nullable|min:10|numeric',
-            'biometric_hash'=>'required|unique:client'
+            'postal'        =>'nullable|min:10000000|numeric',
+            'phone'         =>'required|min:1000000000|numeric',
+            'biometric_hash'=>'unique:clients'
         ];
     }
     public function messages()
     {
         return [
-            'name.required'=>'O campo Nome é obrigatório!',
-            'cpf.required'=>'O campo CPF é obrigatório!',
-            'id_number.required'=>'O campo indentidade é obrigatório!',
-            'biometric_hash'=>'O cadastro dao biometría é obrigatório!',
+            'name.required'=>'O campo Nome é obrigatório.',
+            'cpf.required'=>'O campo CPF é obrigatório.',
+            'id_number.required'=>'O campo indentidade é obrigatório.',
+            'biometric_hash.required'=>'O cadastro da biometría é obrigatório.',
+            'phone.required'=>'O telefone da biometría é obrigatório.',
+
+            'cpf.min'=>'CPF inválido.',
+            'postal.min'=>'CEP inválido.',
+            'phone.min'=>'Telefone inválido.',
+            'id_number.min'=>'Numero de identidade inválido.',
+            'name.min'=>'O campo Nome deve conter no mínimo 5 caracteres.',
+
+            'cpf.unique'=> 'O CPF informado já está cadastrado',
+            'id_number.unique'=> 'A indentidade informada já está cadastrado',
+
+
         ];
     }
 }
