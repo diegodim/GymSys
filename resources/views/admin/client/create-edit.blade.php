@@ -111,7 +111,7 @@
                             <label class="col-lg-2 col-form-label" for="biometric_hash" >Biometria:</label>
                             <div class="col-lg-10">
                                 <button type="button" class="form-control btn btn-warning" data-toggle="modal" data-target="#biometricModal" ><i class="fas fa-fingerprint"></i> Biometria</button>
-                                <input class="form-control" type="hidden" id="biometric_hash" name="biometric_hash" value="{{ old('biometric_hash', isset($client) ?  $client->person->biometric_hash : '') }}">
+                                <input class="form-control" type="hidden" id="biometric_hash" name="biometric_hash" value="{{ old('biometric_hash', isset($client) ?  $client->biometric_hash : '') }}">
                                 <span class="text-danger">{{ $errors->first('biometric_hash') }}</span>
                             </div>
                         </div>
