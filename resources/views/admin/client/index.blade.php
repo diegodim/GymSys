@@ -45,7 +45,7 @@
                         <td>{{ $client->person->cpf }}</td>
                         <td>{{ $client->person->adress }} {{ $client->person->neighborhood }}</td>
                         <td>
-                            <a href=""  class="btn btn-info btn-sm">
+                            <a href="{{ route('client.edit', ['client'=>$client]) }}"  class="btn btn-info btn-sm">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
                             <a href=""  class="btn btn-danger btn-sm">

@@ -98,7 +98,10 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $states = $this->states->orderBy('name')->pluck('uf', 'id');
+        $client = $this->clients->with('person')->find($id);
+        //dd($client);
+        return view('admin.client.create-edit', ['client' => $client, 'states' => $states]);
     }
 
     /**
@@ -111,6 +114,7 @@ class ClientController extends Controller
     public function update(Request $request, $id)
     {
         //
+        dd($request);
     }
 
     /**
