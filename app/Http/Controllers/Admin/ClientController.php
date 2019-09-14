@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ClientCreateFormRequest;
+use App\Http\Requests\ClientEditFormRequest;
 use App\Models\Client;
 use App\Models\Person;
 use App\Models\State;
@@ -111,10 +112,31 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ClientEditFormRequest $request, $id)
     {
         //
-        dd($request);
+        $dataForm = $request->except("_token");
+
+        $person = $this->people->find($id);
+        $client = $this->clients->find($id);
+
+        $update = $person->update($dataForm);
+
+        //dd($request);
+
+        if($update)
+        {
+
+            $update = $client->update($dataForm);
+
+            if($update)
+                return redirect('admin/client');
+            else
+                return redirect()->back()->with(['errors' => 'Falha ao editar!']);
+        }
+        else
+            return redirect()->back()->with(['errors' => 'Falha ao editar!']);
+
     }
 
     /**
