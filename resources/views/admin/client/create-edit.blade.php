@@ -128,7 +128,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                   <button type="button" class="btn btn-primary" data-dismiss="modal" @click="doEdit()">Salvar</button>
                                 </div>
                             </div>

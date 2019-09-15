@@ -79,7 +79,7 @@
                       </div>
                       <div class="modal-footer">
 
-                              <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                               <button type="submit" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()">Sim, Deletar</button>
                       </div>
                   </div>
