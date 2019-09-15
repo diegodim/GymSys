@@ -11,16 +11,12 @@
 @stop
 
 @section('content')
+@include('admin.template.message')
     <div class="box">
         <div class="box-header">
             <div class="row">
                 <div class="col-sm-4">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Pesquisar">
-                        <span class="input-group-btn">
-                            <a href="" class="btn btn-info"><i class="fas fa-search"></i> Buscar</a>
-                        </span>
-                    </div>
+                    @include('admin.template.search')
                 </div>
                 <div class="col-sm-8">
                     <a href="{{ route('client.create') }}"  class="btn btn-success pull-right"><i class="fas fa-plus"></i> Cadastrar</a>
@@ -48,7 +44,7 @@
                             <a href="{{ route('client.edit', ['client'=>$client]) }}"  class="btn btn-info btn-sm">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
-                            <a href=""  class="btn btn-danger btn-sm">
+                            <a href="javascript:;" data-toggle="modal" onclick="deleteData({{ $client->person->id }})" data-target="#deleteModal" class="btn btn-sm btn-danger">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </td>
@@ -67,5 +63,42 @@
         <div class="pull-right">
             {{ $clients->links() }}
         </div>
+        <div id="deleteModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-sm">
+              <!-- Modal content-->
+              <form action="" id="deleteForm" method="post">
+                  <div class="modal-content">
+                      <div class="modal-header bg-danger">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Confirmação de exclusão!</h4>
+                      </div>
+                      <div class="modal-body">
+                          {{ csrf_field() }}
+                          {{ method_field('DELETE') }}
+                          <p id="deleteMessage" class="text-center">Deseja realmente excluir o cliente?</p>
+                      </div>
+                      <div class="modal-footer">
+
+                              <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+                              <button type="submit" class="btn btn-danger" data-dismiss="modal" onclick="formSubmit()">Sim, Deletar</button>
+                      </div>
+                  </div>
+              </form>
+            </div>
+        </div
     </div>
+    <script type="text/javascript">
+        function deleteData(id)
+        {
+            var id = id;
+            var url = '{{ route("client.destroy", ":id") }}';
+            url = url.replace(':id', id);
+            $("#deleteForm").attr('action', url);
+        }
+
+        function formSubmit()
+        {
+            $("#deleteForm").submit();
+        }
+     </script>
 @stop

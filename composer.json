@@ -10,11 +10,13 @@
     "require": {
         "php": "^7.1.3",
         "fideloper/proxy": "^4.0",
+        "geekcom/validator-docs": "1.*",
         "jansenfelipe/faker-br": "^1.0",
         "jeroennoten/laravel-adminlte": "^1.26",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "laravelcollective/html": "^5.8"
+        "laravelcollective/html": "^5.8",
+        "sofa/eloquence-base": "^5.6"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

@@ -17,7 +17,7 @@ class CreatePeopleTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 50);
             $table->string("cpf", 11)->unique()->unique();
-            $table->string("id_number", 15)->unique();
+            $table->string("id_number", 10)->unique();
             $table->string("adress", 50)->nullable();
             $table->string("neighborhood", 50)->nullable();
             $table->string("city", 50)->nullable();

@@ -3,7 +3,12 @@
 @section('title', 'AdminLTE')
 
 @section('content_header')
-    <h1>Cadastro de Cliente</h1>
+    @if(isset($client))
+    <h1>Editar Cliente</h1>
+    @else
+    <h1>Cadastrar Cliente</h1>
+    @endif
+
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.home') }}">Início</a></li>
         <li><a href="{{ route('admin.client') }}">Cliente</a></li>
@@ -13,14 +18,7 @@
 @stop
 
 @section('content')
-    @if(isset($errors) && count($errors)>0)
-    <div class="alert alert-danger alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        @foreach($errors->all() as $error)
-        <p>{{$error}}</p>
-        @endforeach
-    </div>
-    @endif
+@include('admin.template.message')
     <div class="box">
 
         <div class="box-header">
@@ -37,25 +35,25 @@
                 <div class="form-group row {{ $errors->has('name') ? 'has-error' : '' }}" >
                     <label for="name" class="col-lg-1 col-form-label">Nome:</label>
                     <div class="col-lg-11">
-                        <input class="form-control" type="text" placeholder="Nome" id="name" name="name" value="{{ old('name',  isset($client) ?  $client->person->name : '') }}">
+                        <input maxlength="50" size="50" class="form-control" type="text" placeholder="Nome" id="name" name="name" value="{{ old('name',  isset($client) ?  $client->person->name : '') }}">
                     </div>
                 </div>
                 <div class="form-group row {{ $errors->has('cpf') ? 'has-error' : '' }}" >
                     <label for="cpf" class="col-lg-1 col-form-label">CPF:</label>
                     <div class="col-lg-11">
-                            <input class="form-control" type="number" placeholder="CPF" id="cpf" name="cpf" value="{{  old('cpf', isset($client) ?  $client->person->cpf : '') }}">
+                            <input min="0" max="99999999999" maxlength="11" class="form-control" type="number" placeholder="CPF" id="cpf" name="cpf" value="{{  old('cpf', isset($client) ?  $client->person->cpf : '') }}">
                     </div>
                 </div>
                 <div class="form-group row {{ $errors->has('id_number') ? 'has-error' : '' }}" >
                     <label for="id_number" class="col-lg-1 col-form-label">Indetidade:</label>
                     <div class="col-lg-11">
-                        <input class="form-control" type="text" placeholder="Indentidade" id="id_number" name="id_number" value="{{ old('id_number', isset($client) ?  $client->person->id_number : '') }}">
+                        <input maxlength="10" size="10" class="form-control" type="text" placeholder="Indentidade" id="id_number" name="id_number" value="{{ old('id_number', isset($client) ?  $client->person->id_number : '') }}">
                     </div>
                 </div>
                 <div class="form-group row {{ $errors->has('adress') ? 'has-error' : '' }}" >
                     <label for="adress" class="col-lg-1 col-form-label">Endereço:</label>
                     <div class="col-lg-11">
-                        <input class="form-control" type="text" placeholder="Endereço" id="adress" name="adress" value="{{ old('adress', isset($client) ?  $client->person->adress : '') }}">
+                        <input maxlength="50" size="50" class="form-control" type="text" placeholder="Endereço" id="adress" name="adress" value="{{ old('adress', isset($client) ?  $client->person->adress : '') }}">
                     </div>
                 </div>
                 <div class="row">
@@ -63,7 +61,7 @@
                         <div class="form-group row {{ $errors->has('neighborhood') ? 'has-error' : '' }}" >
                             <label class="col-lg-2 col-form-label" for="neighborhood" >Bairro:</label>
                             <div class="col-lg-10">
-                                <input class="form-control" type="text" placeholder="Bairro" id="neeighborhood" name="neighborhood" value="{{ old('neighborhood', isset($client) ?  $client->person->neighborhood : '') }}">
+                                <input maxlength="50" size="50" class="form-control" type="text" placeholder="Bairro" id="neeighborhood" name="neighborhood" value="{{ old('neighborhood', isset($client) ?  $client->person->neighborhood : '') }}">
                             </div>
                         </div>
                     </div>
@@ -71,7 +69,7 @@
                         <div class="form-group row {{ $errors->has('city') ? 'has-error' : '' }}" >
                             <label class="col-lg-2 col-form-label" for="city" >Cidade:</label>
                             <div class="col-lg-10">
-                                <input class="form-control" type="text" placeholder="Cidade" id="city" name="city" value="{{ old('city', isset($client) ?  $client->person->city : '') }}">
+                                <input maxlength="50" size="50" class="form-control" type="text" placeholder="Cidade" id="city" name="city" value="{{ old('city', isset($client) ?  $client->person->city : '') }}">
                             </div>
                         </div>
                     </div>
@@ -81,7 +79,7 @@
                         <div class="form-group row {{ $errors->has('postal') ? 'has-error' : '' }}" >
                             <label class="col-lg-2 col-form-label" for="postal" >CEP:</label>
                             <div class="col-lg-10">
-                                <input class="form-control" type="number" placeholder="CEP" id="postal" name="postal" value="{{ old('postal', isset($client) ?  $client->person->postal : '') }}">
+                                <input min="0" max="99999999" maxlength="8" class="form-control" type="number" placeholder="CEP" id="postal" name="postal" value="{{ old('postal', isset($client) ?  $client->person->postal : '') }}">
                             </div>
                         </div>
                     </div>
@@ -102,7 +100,7 @@
                         <div class="form-group row {{ $errors->has('phone') ? 'has-error' : '' }}" >
                             <label class="col-lg-2 col-form-label" for="phone" >Telefone:</label>
                             <div class="col-lg-10">
-                                <input class="form-control" type="number" placeholder="Telefone" id="phone" name="phone" value="{{ old('phone', isset($client) ?  $client->person->phone : '') }}">
+                                <input min="0" max="99999999999" maxlength="11" class="form-control" type="number" placeholder="Telefone" id="phone" name="phone" value="{{ old('phone', isset($client) ?  $client->person->phone : '') }}">
                             </div>
                         </div>
                     </div>

@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ClientCreateFormRequest;
-use App\Http\Requests\ClientEditFormRequest;
+use App\Http\Requests\ClientFormRequest;
 use App\Models\Client;
 use App\Models\Person;
 use App\Models\State;
@@ -28,11 +27,27 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clients = $this->clients->orderBy('id', 'desc')->with('person')->paginate($this->totalPage);
+        if($request->has('search')){
+            $keyword = $request->get('search');
+            $clients = $this->clients
+                ->search($keyword, ['person.cpf'=>10, 'person.id_number'=>10, 'person.name'=> 6])
+                ->orderBy('id', 'desc')
+                ->with('person')
+                ->paginate($this->totalPage)
+                ->appends(['search' => $keyword]);
+                return view('admin.client.index', ['clients' => $clients, 'search' =>$keyword]);
+        }
+        else{
+            $clients = $this->clients
+            ->orderBy('id', 'desc')
+            ->with('person')
+            ->paginate($this->totalPage);
+            return view('admin.client.index', ['clients' => $clients]);
+        }
         //dd($clients);
-        return view('admin.client.index', ['clients' => $clients]);
+
     }
 
     /**
@@ -53,7 +68,7 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ClientCreateFormRequest $request)
+    public function store(ClientFormRequest $request)
     {
         //
         $dataForm = $request->except(['_token','biometric_hash']);
@@ -69,7 +84,7 @@ class ClientController extends Controller
             ]);
             if($insert)
             {
-                return redirect('admin/client');
+                return redirect('admin/client')->with('success', 'O Cliente foi cadastrado com sucesso!');
             }
             else
                 return redirect()->back();
@@ -112,17 +127,17 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ClientEditFormRequest $request, $id)
+    public function update(ClientFormRequest $request, $id)
     {
         //
         $dataForm = $request->except("_token");
 
-        $person = $this->people->find($id);
-        $client = $this->clients->find($id);
-
+        $person = $this->people->findOrFail($id);
+        $client = $this->clients->findOrFail($id);
+        //dd($request);
         $update = $person->update($dataForm);
 
-        //dd($request);
+
 
         if($update)
         {
@@ -130,7 +145,7 @@ class ClientController extends Controller
             $update = $client->update($dataForm);
 
             if($update)
-                return redirect('admin/client');
+                return redirect('admin/client')->with('success', 'O Cliente foi alterado com sucesso!');
             else
                 return redirect()->back()->with(['errors' => 'Falha ao editar!']);
         }
@@ -147,6 +162,12 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $person = $this->people->findOrFail($id);
+        $delete = $person->delete();
+
+        if ($delete)
+            return redirect('admin/client/')->with('success', 'O cliente '.$person->name.' foi excluído com sucesso!');
+        else
+            return redirect()->back()->with(['error' => 'Falha ao excluír Cliente!']);
     }
 }
