@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="form-group row {{ $errors->has('id_number') ? 'has-error' : '' }}" >
-                    <label for="id_number" class="col-lg-1 col-form-label">Indetidade:</label>
+                    <label for="id_number" class="col-lg-1 col-form-label">Idetidade:</label>
                     <div class="col-lg-11">
                         <input maxlength="10" size="10" class="form-control" type="text" placeholder="Indentidade" id="id_number" name="id_number" value="{{ old('id_number', isset($client) ?  $client->person->id_number : '') }}">
                     </div>
@@ -66,6 +66,17 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
+                        <div class="form-group row {{ $errors->has('postal') ? 'has-error' : '' }}" >
+                            <label class="col-lg-3 col-form-label" for="postal" >CEP:</label>
+                            <div class="col-lg-9">
+                                <input min="0" max="99999999" maxlength="8" class="form-control" type="number" placeholder="CEP" id="postal" name="postal" value="{{ old('postal', isset($client) ?  $client->person->postal : '') }}">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
                         <div class="form-group row {{ $errors->has('city') ? 'has-error' : '' }}" >
                             <label class="col-lg-2 col-form-label" for="city" >Cidade:</label>
                             <div class="col-lg-10">
@@ -73,24 +84,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group row {{ $errors->has('postal') ? 'has-error' : '' }}" >
-                            <label class="col-lg-2 col-form-label" for="postal" >CEP:</label>
-                            <div class="col-lg-10">
-                                <input min="0" max="99999999" maxlength="8" class="form-control" type="number" placeholder="CEP" id="postal" name="postal" value="{{ old('postal', isset($client) ?  $client->person->postal : '') }}">
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-lg-6">
                         <div class="form-group row {{ $errors->has('state_id') ? 'has-error' : '' }}" >
-                            <label class="col-lg-2 col-form-label" for="state_id" >Estado:</label>
-                            <div class="col-lg-10">
+                            <label class="col-lg-3 col-form-label" for="state_id" >Estado:</label>
+                            <div class="col-lg-9">
                                 {{  Form::select('state_id', $states , old('state_id', isset($client) ?  $client->person->state_id : null), ['class'=>'form-control', 'placeholder'=>'Estado']) }}
-                                <!-- <select class="form-control" placeholder="Estado"  id="state_id" name="state_id">
-                                    <option selected="selected" disabled="disabled" hidden="hidden" value="">Selecione o estado</option>
-                                </select> -->
                             </div>
                         </div>
                     </div>
@@ -105,12 +103,11 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="form-group row {{ $errors->has('biometric_hash') ? 'has-error' : '' }}" >
-                            <label class="col-lg-2 col-form-label" for="biometric_hash" >Biometria:</label>
-                            <div class="col-lg-10">
-                                <button type="button" class="form-control btn btn-warning" data-toggle="modal" data-target="#biometricModal" ><i class="fas fa-fingerprint"></i> Biometria</button>
-                                <input class="form-control" type="hidden" id="biometric_hash" name="biometric_hash" value="{{ old('biometric_hash', isset($client) ?  $client->biometric_hash : null) }}">
-                                <span class="text-danger">{{ $errors->first('biometric_hash') }}</span>
+                        <div class="form-group row {{ $errors->has('plan_id') ? 'has-error' : '' }}" >
+                            <label class="col-lg-3 col-form-label" for="plan_id" >Tipo plano:</label>
+                            <div class="col-lg-9">
+                                    {{  Form::select('plan_id', $states , old('plan_id', isset($client) ?  $client->person->state_id : null), ['class'=>'form-control', 'placeholder'=>'Tipo de plano']) }}
+                                <span class="text-danger">{{ $errors->first('plan_id') }}</span>
                             </div>
                         </div>
                     </div>
@@ -126,6 +123,7 @@
                                     <div class="text-center">
                                         <i class="fas fa-fingerprint fa-w-16 fa-7x pull-center"></i>
                                     </div>
+
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -135,9 +133,13 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <button class="btn btn-success pull-right" type="submit" ><i class="fas fa-save"></i> Salvar</button>
+                <div class="form-group pull-right">
+
+                        <button type="button" class="btn btn-warning " data-toggle="modal" data-target="#biometricModal" ><i class="fas fa-fingerprint"></i> Biometria</button>
+                        <input class="form-control" type="hidden" id="biometric_hash" name="biometric_hash" value="{{ old('biometric_hash', isset($client) ?  $client->biometric_hash : null) }}">
+                        <button class="btn btn-success" type="submit" ><i class="fas fa-save"></i> Salvar</button>
                 </div>
+
             </form>
 
         </div>

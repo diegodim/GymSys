@@ -43,7 +43,7 @@ class ClientFormRequest extends FormRequest
         return [
             'name.required'=>'O campo Nome é obrigatório.',
             'cpf.required'=>'O campo CPF é obrigatório.',
-            'id_number.required'=>'O campo indentidade é obrigatório.',
+            'id_number.required'=>'O campo identidade é obrigatório.',
             'biometric_hash.required'=>'O cadastro da biometría é obrigatório.',
             'phone.required'=>'O telefone da biometría é obrigatório.',
 

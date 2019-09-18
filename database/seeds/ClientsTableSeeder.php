@@ -23,8 +23,8 @@ class ClientsTableSeeder extends Seeder
                 'cpf'           =>  $faker->cpf,
                 'adress'        =>  $faker->streetAddress,
                 'city'          =>  $faker->city,
-                'postal'        =>  $faker->randomDigit,
-                'id_number'     =>  $faker->cpf,
+                'postal'        =>  $faker->unique(true)->numberBetween(1, 99999),
+                'id_number'     =>  $faker->randomDigit,
                 'phone'         =>  $faker->randomDigit,
             ]);
 
