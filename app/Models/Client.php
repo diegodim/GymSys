@@ -14,4 +14,9 @@ class Client extends Model
     {
         return $this->hasOne(Person::class, 'id');
     }
+
+    public function plan()
+    {
+        return $this->hasOne(Plan::class);
+    }
 }

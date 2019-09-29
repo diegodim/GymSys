@@ -18,7 +18,7 @@ class CreatePlansTable extends Migration
             $table->string('name', 25);
             $table->longText('description');
             $table->integer('months');
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 

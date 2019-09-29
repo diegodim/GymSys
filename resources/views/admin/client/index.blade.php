@@ -53,7 +53,7 @@
                 @empty
                 <tbody>
                     <tr>
-                    <td><b>Nenhum cliente!</b></td>
+                    <td><b>Nenhum cliente encontrado!</b></td>
                     </tr>
                 </tbody>
                 @endforelse

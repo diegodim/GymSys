@@ -30,6 +30,7 @@ class ClientsTableSeeder extends Seeder
 
             Client::create([
                 'id'                => $person->id,
+                'plan_id'    => 1,
                 'biometric_hash'    => bcrypt($i),
 
             ]);
