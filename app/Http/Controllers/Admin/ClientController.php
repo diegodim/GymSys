@@ -8,18 +8,21 @@ use App\Http\Requests\ClientFormRequest;
 use App\Models\Client;
 use App\Models\Person;
 use App\Models\State;
+use App\Models\Plan;
 
 class ClientController extends Controller
 {
 
     private $clients;
     private $states;
+    private $plans;
     private $people;
     private $totalPage = 7;
-    public function __construct(CLient $clients, State $states, Person $people)
+    public function __construct(CLient $clients, State $states, Person $people, Plan $plans)
     {
         $this->clients = $clients;
         $this->states = $states;
+        $this->plans = $plans;
         $this->people = $people;
     }
     /**
@@ -58,8 +61,9 @@ class ClientController extends Controller
     public function create()
     {
         $states = $this->states->orderBy('name')->pluck('uf', 'id');
+        $plans = $this->plans->orderBy('id')->pluck('name', 'id');
         //dd($states);
-        return view('admin.client.create-edit', ['states' => $states ]);
+        return view('admin.client.create-edit', ['states' => $states,  'plans' => $plans]);
     }
 
     /**
@@ -71,14 +75,16 @@ class ClientController extends Controller
     public function store(ClientFormRequest $request)
     {
         //
-        $dataForm = $request->except(['_token','biometric_hash']);
-
+        $plan_id = $request->plan_id;
+        $dataForm = $request->except(['_token','biometric_hash', 'plan_id']);
+        //dd($dataForm);
         $insert = $this->people->create($dataForm);
-        //dd($insert);
+
         if($insert)
         {
             $insert = $this->clients->create([
                 'id'                => $insert->id,
+                'plan_id'           => $plan_id,
                 'biometric_hash'    => bcrypt($insert->id),
 
             ]);
@@ -115,9 +121,10 @@ class ClientController extends Controller
     public function edit($id)
     {
         $states = $this->states->orderBy('name')->pluck('uf', 'id');
+        $plans = $this->plans->orderBy('id')->pluck('name', 'id');
         $client = $this->clients->with('person')->find($id);
         //dd($client);
-        return view('admin.client.create-edit', ['client' => $client, 'states' => $states]);
+        return view('admin.client.create-edit', ['client' => $client, 'states' => $states,  'plans' => $plans]);
     }
 
     /**

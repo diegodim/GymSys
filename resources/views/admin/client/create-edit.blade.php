@@ -10,9 +10,15 @@
     @endif
 
     <ol class="breadcrumb">
+        @if(isset($client))
+        <li><a href="{{ route('admin.home') }}">Início</a></li>
+        <li><a href="{{ route('admin.client') }}">Cliente</a></li>
+        <li class="active"><a>Editar</a></li>
+        @else
         <li><a href="{{ route('admin.home') }}">Início</a></li>
         <li><a href="{{ route('admin.client') }}">Cliente</a></li>
         <li class="active"><a>Cadastrar</a></li>
+        @endif
     </ol>
 
 @stop
@@ -106,8 +112,7 @@
                         <div class="form-group row {{ $errors->has('plan_id') ? 'has-error' : '' }}" >
                             <label class="col-lg-3 col-form-label" for="plan_id" >Tipo plano:</label>
                             <div class="col-lg-9">
-                                    {{  Form::select('plan_id', $states , old('plan_id', isset($client) ?  $client->person->state_id : null), ['class'=>'form-control', 'placeholder'=>'Tipo de plano']) }}
-                                <span class="text-danger">{{ $errors->first('plan_id') }}</span>
+                                    {{  Form::select('plan_id', $plans , old('plan_id', isset($client) ?  $client->plan_id : null), ['class'=>'form-control', 'placeholder'=>'Tipo de plano']) }}
                             </div>
                         </div>
                     </div>

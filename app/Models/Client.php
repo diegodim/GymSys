@@ -8,7 +8,7 @@ class Client extends Model
 {
     use Eloquence;
     protected $fillable = [
-        'id', 'biometric_hash'
+        'id', 'biometric_hash', 'plan_id'
     ];
     public function person()
     {

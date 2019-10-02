@@ -33,6 +33,7 @@ class ClientFormRequest extends FormRequest
             'neighborhood'  =>'nullable|min:3|max:50',
             'city'          =>'nullable|min:3|max:50',
             'state_id'      =>'nullable|numeric',
+            'plan_id'       =>'required|numeric',
             'postal'        =>'nullable|min:10000000|max:99999999|numeric',
             'phone'         =>'required|min:1000000000|max:99999999999|numeric',
             'biometric_hash'=>''.Rule::unique('clients')->ignore($this->client),
@@ -45,7 +46,8 @@ class ClientFormRequest extends FormRequest
             'cpf.required'=>'O campo CPF é obrigatório.',
             'id_number.required'=>'O campo identidade é obrigatório.',
             'biometric_hash.required'=>'O cadastro da biometría é obrigatório.',
-            'phone.required'=>'O telefone da biometría é obrigatório.',
+            'phone.required'=>'O campo telefone é obrigatório.',
+            'plan_id.required'=>'O campo Tipo de plano é obrigatório.',
 
             'cpf.min'=>'CPF inválido.',
             'postal.min'=>'CEP inválido.',
