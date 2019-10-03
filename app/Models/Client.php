@@ -19,4 +19,14 @@ class Client extends Model
     {
         return $this->hasOne(Plan::class);
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class)->latest('due_at');
+    }
 }

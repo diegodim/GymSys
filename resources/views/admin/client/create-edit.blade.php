@@ -53,7 +53,7 @@
                 <div class="form-group row {{ $errors->has('id_number') ? 'has-error' : '' }}" >
                     <label for="id_number" class="col-lg-1 col-form-label">Idetidade:</label>
                     <div class="col-lg-11">
-                        <input maxlength="10" size="10" class="form-control" type="text" placeholder="Indentidade" id="id_number" name="id_number" value="{{ old('id_number', isset($client) ?  $client->person->id_number : '') }}">
+                        <input style="text-transform:uppercase" maxlength="10" size="10" class="form-control" type="text" placeholder="Indentidade" id="id_number" name="id_number" value="{{ old('id_number', isset($client) ?  $client->person->id_number : '') }}">
                     </div>
                 </div>
                 <div class="form-group row {{ $errors->has('adress') ? 'has-error' : '' }}" >

@@ -139,23 +139,21 @@ return [
                     'url'         => 'admin/payment',
                     'icon'        => 'fas fa-dollar-sign',
                 ],
-                [
-                    'text'        => 'Relatório Finaceiro',
-                    'url'         => 'admin/payment/report',
-                    'icon'        => 'fas fa-file-invoice-dollar',
-                ],
             ]
         ],
-        ['header' => 'Configurações de usuário'],
+        ['header' => 'Configurações de usuário',
+        'can'  => 'manage-blog',],
         [
             'text' => 'profile',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
+            'can'  => 'manage-blog',
         ],
         [
             'text' => 'change_password',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
+            'can'  => 'manage-blog',
         ],
     ],
 

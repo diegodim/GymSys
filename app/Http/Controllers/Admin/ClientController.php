@@ -85,7 +85,7 @@ class ClientController extends Controller
             $insert = $this->clients->create([
                 'id'                => $insert->id,
                 'plan_id'           => $plan_id,
-                'biometric_hash'    => bcrypt($insert->id),
+                //'biometric_hash'    => bcrypt($insert->id),
 
             ]);
             if($insert)

@@ -85,7 +85,7 @@
                   </div>
               </form>
             </div>
-        </div>
+        </div
     </div>
     <script type="text/javascript">
         function deleteData(id)

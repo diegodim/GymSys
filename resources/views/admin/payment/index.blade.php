@@ -3,7 +3,7 @@
 @section('title', 'AdminLTE')
 
 @section('content_header')
-    <h1>Cliente</h1>
+    <h1>Pagamento</h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.home') }}">Início</a></li>
         <li class="active"><a>Pagamento</a></li>
@@ -18,9 +18,6 @@
                 <div class="col-sm-4">
                     @include('admin.template.search')
                 </div>
-                <div class="col-sm-8">
-                    <a href="{{ route('client.create') }}"  class="btn btn-success pull-right"><i class="fas fa-plus"></i> Cadastrar</a>
-                </div>
             </div>
         </div>
         <div class="box-body">
@@ -30,8 +27,9 @@
                     <tr>
                         <th>Nome</th>
                         <th>CPF</th>
-                        <th>Endereço</th>
-                        <th width="100px">Ações</th>
+                        <th>Situação</th>
+                        <th>Vencimento</th>
+                        <th width="80px">Pagar</th>
                     </tr>
                 </thead>
                 @forelse ($clients as $client)
@@ -39,13 +37,20 @@
                     <tr>
                         <td>{{ $client->person->name }}</td>
                         <td>{{ $client->person->cpf }}</td>
-                        <td>{{ $client->person->adress }} {{ $client->person->neighborhood }}</td>
+                        @if(isset($client->payment))
+                            @if(Carbon\Carbon::parse($client->payment->due_at)->addDays(1) <  Carbon\Carbon::now())
+                            <td>Inadimplente</td>
+                            @else
+                            <td>Adimplente</td>
+                            @endif
+                        <td>{{ Carbon\Carbon::parse($client->payment->due_at)->format('d/m/Y') }}</td>
+                        @else
+                        <td>-</td>
+                        <td>{{ Carbon\Carbon::today()->format('d/m/Y') }}</td>
+                        @endif
                         <td>
-                            <a href="{{ route('client.edit', ['client'=>$client]) }}"  class="btn btn-info btn-sm">
-                                <i class="fas fa-pencil-alt"></i>
-                            </a>
-                            <a href="javascript:;" data-toggle="modal" onclick="deleteData({{ $client->person->id }})" data-target="#deleteModal" class="btn btn-sm btn-danger">
-                                <i class="fas fa-trash-alt"></i>
+                            <a href="{{ route('client.edit', ['client'=>$client]) }}"  class="btn btn-warning btn-sm">
+                                <i class="fas fa-dollar-sign"></i>
                             </a>
                         </td>
                     </tr>
