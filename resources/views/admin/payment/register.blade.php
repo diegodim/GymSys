@@ -96,7 +96,7 @@
 
                     <div class="col-lg-6">
                         <div class="form-group row {{ $errors->has('value') ? 'has-error' : '' }}" >
-                            <div class="col-lg-4">Valor do pagamento:</div>
+                            <label style="font-weight:normal" class="col-lg-4" for="value">Valor do pagamento:</label>
                             <div class="col-lg-8">
                                 <div class="input-group mb-3">
                                     <span class="input-group-addon">R$</span>
@@ -116,7 +116,7 @@
                     </div>
                 </div>
                 <div class="form-group pull-right">
-                    <button class="btn btn-success" type="submit" ><i class="fas fa-save"></i> Pagar</button>
+                    <button class="btn btn-success" type="submit" ><i class="fas fa-dollar-sign"></i> Pagar</button>
                 </div>
             </form>
         </div>
