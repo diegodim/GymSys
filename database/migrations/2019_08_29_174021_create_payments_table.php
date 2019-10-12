@@ -22,7 +22,7 @@ class CreatePaymentsTable extends Migration
             $table->double('value', 10, 2);
             $table->timestamps();
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

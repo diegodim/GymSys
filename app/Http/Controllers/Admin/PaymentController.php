@@ -4,25 +4,27 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ClientFormRequest;
+use App\Http\Requests\PaymentFormRequest;
 use App\Models\Client;
 use App\Models\Person;
 use App\Models\Plan;
 use App\Models\Payment;
+use Auth;
 
 class PaymentController extends Controller
 {
     //
     private $clients;
-
+    private $payment;
     private $plans;
     private $people;
     private $totalPage = 7;
-    public function __construct(CLient $clients, Person $people, Plan $plans)
+    public function __construct(CLient $clients, Person $people, Plan $plans, Payment $payment)
     {
         $this->clients = $clients;
         $this->plans = $plans;
         $this->people = $people;
+        $this->payment = $payment;
     }
 
 
@@ -48,6 +50,46 @@ class PaymentController extends Controller
             //dd($clients);
             return view('admin.payment.index', ['clients' => $clients]);
         }
+    }
+
+
+        /**
+     * Show the form for creating a new resource.
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function register($id)
+    {
+        $clients = $this->clients
+        ->with('plan')
+        ->with('person')
+        ->with('payment')->find($id);
+        //dd($clients);
+
+        return view('admin.payment.register', ['client' => $clients]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(PaymentFormRequest $request, $id)
+    {
+        
+        $dataForm = $request->except(['_token']);
+        //dd($id, $dataForm);
+        $dataForm['user_id'] = Auth::user()->id;
+        $dataForm['client_id'] = $id;
+        $insert = $this->payment->create($dataForm);
+        if($insert)
+        {
+            return redirect('admin/payment')->with('success', 'O Pagamento foi registrado com sucesso!');
+        }
+        else
+            return redirect()->back();
+
     }
 
 

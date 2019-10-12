@@ -49,7 +49,7 @@
                         <td>{{ Carbon\Carbon::today()->format('d/m/Y') }}</td>
                         @endif
                         <td>
-                            <a href="{{ route('client.edit', ['client'=>$client]) }}"  class="btn btn-warning btn-sm">
+                            <a href="{{ route('payment.register', ['client'=>$client]) }}"  class="btn btn-warning btn-sm">
                                 <i class="fas fa-dollar-sign"></i>
                             </a>
                         </td>

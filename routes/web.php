@@ -23,6 +23,8 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     Route::delete('client/{client}', 'ClientController@destroy')->name('client.destroy');
 
     Route::get('payment', 'PaymentController@index')->name('admin.payment');
+    Route::get('payment/{id}/register', 'PaymentController@register')->name('payment.register');
+    Route::post('payment/{id}/store', 'PaymentController@store')->name('payment.store');
 
 
 });

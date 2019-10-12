@@ -36,7 +36,7 @@ class ClientFormRequest extends FormRequest
             'plan_id'       =>'required|numeric',
             'postal'        =>'nullable|min:10000000|max:99999999|numeric',
             'phone'         =>'required|min:1000000000|max:99999999999|numeric',
-            'biometric_hash'=>''.Rule::unique('clients')->ignore($this->client),
+            'biometric_hash'=>'nullable|'.Rule::unique('clients')->ignore($this->client),
         ];
     }
     public function messages()
