@@ -17,6 +17,8 @@
 
 @section('content')
 @include('admin.template.message')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://rawgit.com/RobinHerbots/Inputmask/5.x/dist/jquery.inputmask.min.js"></script>
     <div class="box">
 
         <div class="box-header">
@@ -38,7 +40,7 @@
                         <div class="form-group row" >
                             <div class="col-lg-4">CPF do cliente:</div>
 
-                            <label class="col-lg-8 col-form-label" >{{ isset($client) ?  $client->person->cpf : '' }}</label>
+                            <label id='cpf'class="col-lg-8 col-form-label" >{{ isset($client) ?  $client->person->cpf : '' }}</label>
 
                         </div>
                     </div>
@@ -121,5 +123,7 @@
             </form>
         </div>
     </div>
-
+    <script type="text/javascript">
+        $("label[id*='cpf']").inputmask({mask: '999.999.999-99'});
+    </script>
 @stop

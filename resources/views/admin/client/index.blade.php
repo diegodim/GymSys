@@ -12,6 +12,8 @@
 
 @section('content')
 @include('admin.template.message')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://rawgit.com/RobinHerbots/Inputmask/5.x/dist/jquery.inputmask.min.js"></script>
     <div class="box">
         <div class="box-header">
             <div class="row">
@@ -38,8 +40,14 @@
                 <tbody>
                     <tr>
                         <td>{{ $client->person->name }}</td>
-                        <td>{{ $client->person->cpf }}</td>
-                        <td>{{ $client->person->adress }} {{ $client->person->neighborhood }}</td>
+                        <td id='cpf'>{{ $client->person->cpf }}</td>
+                       @if ($client->person->neighborhood != '')
+                       <td>{{ $client->person->adress }}, {{ $client->person->neighborhood }}</td>
+                       @else
+                       <td>{{ $client->person->adress }}</td>
+                       @endif
+
+
                         <td>
                             <a href="{{ route('client.edit', ['client'=>$client]) }}"  class="btn btn-info btn-sm">
                                 <i class="fas fa-pencil-alt"></i>
@@ -88,6 +96,7 @@
         </div
     </div>
     <script type="text/javascript">
+        $("td[id*='cpf']").inputmask({mask: '999.999.999-99'});
         function deleteData(id)
         {
             var id = id;
@@ -100,5 +109,6 @@
         {
             $("#deleteForm").submit();
         }
+
      </script>
 @stop

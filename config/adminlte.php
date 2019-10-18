@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Gym</b>Sys',
+    'logo' => '<b><i class="fas fa-dumbbell"></i> Gym</b>Sys',
 
-    'logo_mini' => '<b>G</b>S',
+    'logo_mini' => '<b><i class="fas fa-dumbbell"></i></b>',
 
     /*
     |--------------------------------------------------------------------------

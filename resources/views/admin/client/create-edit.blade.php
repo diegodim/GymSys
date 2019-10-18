@@ -25,6 +25,8 @@
 
 @section('content')
 @include('admin.template.message')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://rawgit.com/RobinHerbots/Inputmask/5.x/dist/jquery.inputmask.min.js"></script>
     <div class="box">
 
         <div class="box-header">
@@ -47,7 +49,7 @@
                 <div class="form-group row {{ $errors->has('cpf') ? 'has-error' : '' }}" >
                     <label for="cpf" class="col-lg-1 col-form-label">CPF:</label>
                     <div class="col-lg-11">
-                            <input min="0" max="99999999999" maxlength="11" class="form-control" type="number" placeholder="CPF" id="cpf" name="cpf" value="{{  old('cpf', isset($client) ?  $client->person->cpf : '') }}">
+                            <input  maxlength="14" class="form-control" type="text" placeholder="CPF" id="cpf" name="cpf" value="{{  old('cpf', isset($client) ?  $client->person->cpf : '') }}">
                     </div>
                 </div>
                 <div class="form-group row {{ $errors->has('id_number') ? 'has-error' : '' }}" >
@@ -75,7 +77,7 @@
                         <div class="form-group row {{ $errors->has('postal') ? 'has-error' : '' }}" >
                             <label class="col-lg-3 col-form-label" for="postal" >CEP:</label>
                             <div class="col-lg-9">
-                                <input min="0" max="99999999" maxlength="8" class="form-control" type="number" placeholder="CEP" id="postal" name="postal" value="{{ old('postal', isset($client) ?  $client->person->postal : '') }}">
+                                <input maxlength="9" class="form-control" type="text" placeholder="CEP" id="postal" name="postal" value="{{ old('postal', isset($client) ?  $client->person->postal : '') }}">
                             </div>
                         </div>
                     </div>
@@ -104,7 +106,7 @@
                         <div class="form-group row {{ $errors->has('phone') ? 'has-error' : '' }}" >
                             <label class="col-lg-2 col-form-label" for="phone" >Telefone:</label>
                             <div class="col-lg-10">
-                                <input min="0" max="99999999999" maxlength="11" class="form-control" type="number" placeholder="Telefone" id="phone" name="phone" value="{{ old('phone', isset($client) ?  $client->person->phone : '') }}">
+                                <input maxlength="14" class="form-control" type="text" placeholder="Telefone" id="phone" name="phone" value="{{ old('phone', isset($client) ?  $client->person->phone : '') }}">
                             </div>
                         </div>
                     </div>
@@ -149,5 +151,18 @@
 
         </div>
     </div>
-
+    <script type="text/javascript">
+        $("input[id*='cpf']").inputmask({mask: '999.999.999-99',
+            removeMaskOnSubmit: true,
+            keepStatic: true
+        });
+        $("input[id*='phone']").inputmask({mask: ['(99)9999-9999', '(99)99999-9999'],
+            removeMaskOnSubmit: true,
+            keepStatic: true
+        });
+        $("input[id*='postal']").inputmask({mask: '99999-999',
+            removeMaskOnSubmit: true,
+            keepStatic: true
+        });
+    </script>
 @stop

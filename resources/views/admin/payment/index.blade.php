@@ -12,6 +12,8 @@
 
 @section('content')
 @include('admin.template.message')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://rawgit.com/RobinHerbots/Inputmask/5.x/dist/jquery.inputmask.min.js"></script>
     <div class="box">
         <div class="box-header">
             <div class="row">
@@ -36,7 +38,7 @@
                 <tbody>
                     <tr>
                         <td>{{ $client->person->name }}</td>
-                        <td>{{ $client->person->cpf }}</td>
+                        <td id='cpf'>{{ $client->person->cpf }}</td>
                         @if(isset($client->payment))
                             @if(Carbon\Carbon::parse($client->payment->due_at)->addDays(1) <  Carbon\Carbon::now())
                             <td>Inadimplente</td>
@@ -69,4 +71,7 @@
             {{ $clients->links() }}
         </div>
     </div>
+    <script type="text/javascript">
+        $("td[id*='cpf']").inputmask({mask: '999.999.999-99'});
+    </script>
 @stop
